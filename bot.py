@@ -137,6 +137,7 @@ async def alts(ctx, day:int=None):
             await member.ban()
         except disnake.errors.Forbidden:
             await ctx.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+            continue
         except:
             logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
         else:
