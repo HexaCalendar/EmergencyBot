@@ -141,7 +141,7 @@ async def alts(ctx, day:int=None):
         except:
             logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
         else:
-            await ctx.send("[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
+            await ctx.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
         
         setup_name = ctx.guild
         try:
