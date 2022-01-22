@@ -70,16 +70,28 @@ async def on_member_join(member):
   # Alts Kicker
   days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
   if days < timedelta(days=30):
-      await member.ban()
-      
-      for i in ok:
-          channel = bot.get_channel(i)
-          try:
-              await channel.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
-          except discord.Forbidden:
-              pass
-          except:
-              logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+      try:
+        await member.ban()
+      except discord.Forbidden:
+        pass
+      except:
+        logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+      else:
+          for i in ok:
+              channel = bot.get_channel(i)
+              try:
+                  await channel.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
+              except disnake.ext.commands.errors.CommandInvokeError:
+                  for i in ok:
+                      channel = bot.get_channel(i)
+                      try:
+                          await channel.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+                      except disnake.Forbidden:
+                          pass
+                      except:
+                          logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+              except:
+                  logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
               
       setup_name = member.guild
               
@@ -93,7 +105,7 @@ async def on_member_join(member):
             channel = bot.get_channel(i)
             try:
                 await channel.send(f"[Bot]: ✅ Sent a DM to the banned member. ({member.name}#{member.discriminator})")
-            except discord.Forbidden:
+            except disnake.Forbidden:
                 pass
             except:
                 logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
@@ -102,7 +114,7 @@ async def on_member_join(member):
             channel = bot.get_channel(i)
             try:
                 await channel.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
-            except discord.Forbidden:
+            except disnake.Forbidden:
                 pass
             except:
                 logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
@@ -111,7 +123,7 @@ async def on_member_join(member):
       channel = bot.get_channel(i)
       try:
           await channel.send(f"[Bot]: ⚡ This account is not banned. ({member.name}#{member.discriminator})")
-      except discord.Forbidden:
+      except disnake.Forbidden:
           pass
       except:
           logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
@@ -122,8 +134,15 @@ async def alts(ctx):
   for member in ctx.guild.members:
     days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
     if days < timedelta(days=30):
-        await member.ban()
-        await ctx.reply("[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
+        try:
+            await member.ban()
+        except discord.Forbidden:
+            await ctx.reply(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+        except:
+            logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+        else:
+            await ctx.reply("[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
+        
         setup_name = ctx.guild
         try:
           embed = disnake.Embed(
