@@ -72,6 +72,13 @@ async def on_member_join(member):
   if days < timedelta(days=30):
       try:
         await member.ban()
+      except disnake.errors.Forbidden:
+          for i in ok:
+              channel = bot.get_channel(i)
+              try:
+                  await channel.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+              except:
+                  logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")        
       except:
         logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
       else:
@@ -79,7 +86,7 @@ async def on_member_join(member):
               channel = bot.get_channel(i)
               try:
                   await channel.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
-              except disnake.ext.commands.errors.CommandInvokeError:
+              except disnake.errors.Forbidden:
                   for i in ok:
                       channel = bot.get_channel(i)
                       try:
@@ -126,8 +133,8 @@ async def alts(ctx):
     if days < timedelta(days=30):
         try:
             await member.ban()
-        except disnake.ext.commands.errors.CommandInvokeError:
-            await ctx.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+          except disnake.errors.Forbidden:
+                await ctx.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
         except:
             logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
         else:
