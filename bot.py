@@ -1,5 +1,6 @@
 import disnake
 import os
+import config
 from disnake.ext import commands
 from utils import createLogger
 from datetime import datetime
@@ -53,4 +54,4 @@ async def alts(ctx):
         except:
           logger.error(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
       
-bot.run(TOKEN)
+bot.run(config.token)
