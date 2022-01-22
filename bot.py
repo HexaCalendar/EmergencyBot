@@ -80,7 +80,16 @@ async def on_member_join(member):
                 pass
             except:
                 logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
-
+                
+  for i in ok:
+      channel = bot.get_channel(i)
+      try:
+          await channel.send(f"[Bot]: ⚡ This account is not banned. ({member.name}#{member.discriminator})")
+      except discord.Forbidden:
+          pass
+      except:
+          logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+  
 @bot.command(name="alts")
 async def alts(ctx):
   # Alts Kicker
