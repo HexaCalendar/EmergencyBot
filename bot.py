@@ -9,7 +9,7 @@ def createLogger(name: str, level: int = 20):
     import sys
     import logging
     import config
-    from Webhook import WebhookHandler
+    from modules.Webhook import WebhookHandler
 
     LOGGER = logging.getLogger(name)
     FORMATTER = logging.Formatter(
