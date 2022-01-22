@@ -40,9 +40,9 @@ async def on_ready():
   logger.info(f"[Bot]: ✅ Loaded bot.py")
   try:
       bot.load_extension("jishaku")
-      logger.info(f"✅ [Bot] Loaded jishaku")
+      logger.info(f"[Bot] ✅ Loaded jishaku")
   except:
-      logger.error(f"❌ [Bot] Load failed jishaku")
+      logger.error(f"[Bot] ❌ Load failed jishaku, ERROR: {str(traceback.format_exc())}")
 
 @bot.event
 async def on_member_join(member):
