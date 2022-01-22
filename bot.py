@@ -72,8 +72,6 @@ async def on_member_join(member):
   if days < timedelta(days=30):
       try:
         await member.ban()
-      except disnake.Forbidden:
-        pass
       except:
         logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
       else:
@@ -86,8 +84,6 @@ async def on_member_join(member):
                       channel = bot.get_channel(i)
                       try:
                           await channel.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
-                      except disnake.Forbidden:
-                          pass
                       except:
                           logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
               except:
@@ -105,8 +101,6 @@ async def on_member_join(member):
             channel = bot.get_channel(i)
             try:
                 await channel.send(f"[Bot]: ✅ Sent a DM to the banned member. ({member.name}#{member.discriminator})")
-            except disnake.Forbidden:
-                pass
             except:
                 logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
       except:
@@ -114,8 +108,6 @@ async def on_member_join(member):
             channel = bot.get_channel(i)
             try:
                 await channel.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
-            except disnake.Forbidden:
-                pass
             except:
                 logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
                 
@@ -123,8 +115,6 @@ async def on_member_join(member):
       channel = bot.get_channel(i)
       try:
           await channel.send(f"[Bot]: ⚡ This account is not banned. ({member.name}#{member.discriminator})")
-      except disnake.Forbidden:
-          pass
       except:
           logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
   
