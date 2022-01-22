@@ -32,7 +32,7 @@ def createLogger(name: str, level: int = 20):
     return LOGGER
 
   
-bot = commands.Bot(command_prefix = ["!"], intents = disnake.Intents.all(), owner_ids=[902700864748273704]) 
+bot = commands.Bot(command_prefix = ["!"], intents = disnake.Intents.all(), owner_ids=config.owner_ids) 
 logger = createLogger("bot")
 
 @bot.event
