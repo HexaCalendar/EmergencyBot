@@ -8,7 +8,13 @@
 ### 0. Python 설치
 컴퓨터에 먼저 Python3.8을 설치해 주세요.
 
-### 1. TOKEN과 로그 채널 지정
+### 1. 모듈 설치
+```sh
+python3 -m pip install -r requirements.txt
+```
+로 모듈을 설치해 주세요.
+
+### 2. TOKEN과 로그 채널 지정
 config.py에 TOKEN에 Discord TOKEN, WEBHOOK에 로그할 채널의 웹후크를 입력해 주세요.<br>
 * 매 유저가 들어올 때 마다 로그되는 채널의 Topic(채널 주제)에 `-AltLog`을 입력해 주세요.
 
@@ -16,10 +22,10 @@ config.py에 TOKEN에 Discord TOKEN, WEBHOOK에 로그할 채널의 웹후크를
   * 매 유저가 들어올 때 로그 되는 채널: `-AltLog`이 있는 채널<br>
   * !alts 명령어가 실행될 때 로그 되는 채널: 해당 명령어가 실행된 채널<br>
 
-### 2. 봇 초대
+### 3. 봇 초대
 해당 토큰의 봇을 초대해 주세요.
 
-### 3. 작동
+### 4. 작동
 ```sh
 python3 bot.py
 ```
