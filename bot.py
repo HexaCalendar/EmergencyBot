@@ -126,11 +126,13 @@ async def on_member_join(member):
           logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
   
 @bot.command(name="alts")
-async def alts(ctx):
+async def alts(ctx, day:int=None):
   # Alts Kicker
+  if day is None:
+        day = 30
   for member in ctx.guild.members:
     days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
-    if days < timedelta(days=30):
+    if days < timedelta(days=day):
         try:
             await member.ban()
         except disnake.errors.Forbidden:
