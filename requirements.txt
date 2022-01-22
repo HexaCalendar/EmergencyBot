@@ -1,0 +1,2 @@
+disnake==2.3.0
+disnake-jishaku==2.6.5
