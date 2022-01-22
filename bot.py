@@ -72,7 +72,7 @@ async def on_member_join(member):
   if days < timedelta(days=30):
       try:
         await member.ban()
-      except discord.Forbidden:
+      except disnake.Forbidden:
         pass
       except:
         logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
