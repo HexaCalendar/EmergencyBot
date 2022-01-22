@@ -3,9 +3,35 @@ import os
 import config
 import traceback
 from disnake.ext import commands
-from utils import createLogger
 from datetime import datetime
 
+def createLogger(name: str, level: int = 20):
+    import sys
+    import logging
+    import config
+    from Webhook import WebhookHandler
+
+    LOGGER = logging.getLogger(name)
+    FORMATTER = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    streamHandler = logging.StreamHandler(sys.stdout)
+    streamHandler.setFormatter(FORMATTER)
+    fileHandler = logging.FileHandler(
+        filename=f"./{name}.log", mode="w", encoding="utf8"
+    )
+    webhookHandler = WebhookHandler(
+        config.webhook
+    )
+    webhookHandler.setLevel(level)
+    fileHandler.setFormatter(FORMATTER)
+    LOGGER.setLevel(level)
+    LOGGER.addHandler(streamHandler)
+    LOGGER.addHandler(fileHandler)
+    LOGGER.addHandler(webhookHandler)
+    return LOGGER
+
+  
 bot = commands.Bot(command_prefix = ["!"], intents = disnake.Intents.all(), owner_ids=[902700864748273704]) 
 logger = createLogger("bot")
 
