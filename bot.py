@@ -1,15 +1,10 @@
 import disnake
-import setting
 import os
 from disnake.ext import commands
-from dotenv import load_dotenv
-from setting.link_b import Link
 from utils import createLogger
 from datetime import datetime
-from asyncio import sleep
 
 bot = commands.Bot(command_prefix = ["!"], intents = disnake.Intents.all(), owner_ids=[902700864748273704]) 
-load_dotenv(verbose=True)
 logger = createLogger("bot")
 
 @bot.event
@@ -28,7 +23,7 @@ async def on_member_join(member):
   if days < timedelta(days=30):
       await member.ban()
       logger.info("[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
-      setup_name = bot.get_guild(setting.config.setup_id)
+      setup_name = member.guild
       try:
         embed = disnake.Embed(
           title = f"{setup_name} 자동 차단",
@@ -47,7 +42,7 @@ async def alts(ctx):
     if days < timedelta(days=30):
         await member.ban()
         logger.info("[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
-        setup_name = bot.get_guild(setting.config.setup_id)
+        setup_name = ctx.guild
         try:
           embed = disnake.Embed(
             title = f"{setup_name} 자동 차단",
@@ -58,4 +53,4 @@ async def alts(ctx):
         except:
           logger.error(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
       
-bot.run(setting.config.token)
+bot.run(TOKEN)
