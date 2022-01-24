@@ -71,6 +71,13 @@ async def on_member_join(member):
   # Alts Kicker
   days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
   if days < timedelta(days=30):
+    
+      file = open('whitelist.json', 'r')
+      x = file.read()
+      if x in member.id:
+            return
+      file.close()
+        
       try:
         embed = disnake.Embed(
           title = f"{setup_name} 자동 차단",
