@@ -71,6 +71,26 @@ async def on_member_join(member):
   days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
   if days < timedelta(days=30):
       try:
+        embed = disnake.Embed(
+          title = f"{setup_name} 자동 차단",
+          description = f'Discord 계정이 가입한지 30일이 경과되지 않았어요.\n테러 방지 차원으로 이런 조치를 취하게 되어 양해 부탁드려요.'
+        )
+        await member.send(embed = embed, view = Link())
+        for i in ok:
+            channel = bot.get_channel(i)
+            try:
+                await channel.send(f"[Bot]: ✅ Sent a DM to the banned member. ({member.name}#{member.discriminator})")
+            except:
+                logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+      except:
+        for i in ok:
+            channel = bot.get_channel(i)
+            try:
+                await channel.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
+            except:
+                logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+                
+      try:
         await member.ban()
       except disnake.errors.Forbidden:
           for i in ok:
@@ -97,26 +117,6 @@ async def on_member_join(member):
                   logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
               
       setup_name = member.guild
-              
-      try:
-        embed = disnake.Embed(
-          title = f"{setup_name} 자동 차단",
-          description = f'Discord 계정이 가입한지 30일이 경과되지 않았어요.\n테러 방지 차원으로 이런 조치를 취하게 되어 양해 부탁드려요.'
-        )
-        await member.send(embed = embed, view = Link())
-        for i in ok:
-            channel = bot.get_channel(i)
-            try:
-                await channel.send(f"[Bot]: ✅ Sent a DM to the banned member. ({member.name}#{member.discriminator})")
-            except:
-                logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
-      except:
-        for i in ok:
-            channel = bot.get_channel(i)
-            try:
-                await channel.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
-            except:
-                logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
                 
   for i in ok:
       channel = bot.get_channel(i)
@@ -133,16 +133,6 @@ async def alts(ctx, day:int=None):
   for member in ctx.guild.members:
     days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
     if days < timedelta(days=day):
-        try:
-            await member.ban()
-        except disnake.errors.Forbidden:
-            await ctx.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
-            continue
-        except:
-            logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
-        else:
-            await ctx.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
-        
         setup_name = ctx.guild
         try:
           embed = disnake.Embed(
@@ -153,6 +143,16 @@ async def alts(ctx, day:int=None):
           await ctx.send(f"[Bot]: ✅ Sent a DM to the kicked member. ({member.name}#{member.discriminator})")
         except:
           await ctx.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
+        
+        try:
+            await member.ban()
+        except disnake.errors.Forbidden:
+            await ctx.send(f"[Bot]: 🔥 I don't have permisson. ({member.name}#{member.discriminator})")
+            continue
+        except:
+            logger.error(f"[Bot]: ❌ Error! {str(traceback.format_exc())}")
+        else:
+            await ctx.send(f"[Bot]: 🔨 Banned an alt ({member.name}#{member.discriminator})")
     else:
       await ctx.send(f"[Bot]: ⚡ This account is not banned. ({member.name}#{member.discriminator})")
       pass
