@@ -58,14 +58,14 @@ async def on_member_join(member):
       else:
           pass
         
-  for guild in guilds:
-    channels = guild.text_channels
-    for _channel in channels:
-        if len(ok) > 0:
-            break
-        random_channel = random.choices(channels)
-        ok.append(random_channel[0].id)
-        break
+  
+  channels = member.guild.text_channels
+  for _channel in channels:
+      if len(ok) > 0:
+          break
+      random_channel = random.choices(channels)
+      ok.append(random_channel[0].id)
+      break
           
   # Alts Kicker
   days = datetime.now().replace(tzinfo=None) - member.created_at.replace(tzinfo=None)
