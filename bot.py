@@ -83,7 +83,8 @@ async def on_member_join(member):
           title = f"{setup_name} 자동 차단",
           description = f'Discord 계정이 가입한지 30일이 경과되지 않았어요.\n테러 방지 차원으로 이런 조치를 취하게 되어 양해 부탁드려요.'
         )
-        await member.send(embed = embed, view = Link())
+        dm = await member.create_dm()
+        await dm.send(embed = embed, view = Link())
         for i in ok:
             channel = bot.get_channel(i)
             try:
@@ -147,7 +148,8 @@ async def alts(ctx, day:int=None):
             title = f"{setup_name} 자동 차단",
             description = f'Discord 계정이 가입한지 30일이 경과되지 않았어요.\n테러 방지 차원으로 이런 조치를 취하게 되어 양해 부탁드려요.'
           )
-          await member.send(embed = embed, view = Link())
+          dm = await member.create_dm()
+          await dm.send(embed = embed, view = Link())
           await ctx.send(f"[Bot]: ✅ Sent a DM to the kicked member. ({member.name}#{member.discriminator})")
         except:
           await ctx.send(f"[Bot]: ❌ Couldn't send a DM to the kicked member. ({member.name}#{member.discriminator})")
