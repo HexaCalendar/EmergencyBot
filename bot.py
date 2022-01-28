@@ -167,5 +167,49 @@ async def alts(ctx, day:int=None):
       await ctx.send(f"[Bot]: ⚡ This account is not banned. ({member.name}#{member.discriminator})")
       pass
   await ctx.send(f"[Bot]: ✅ Finish.")
+
+@bot.command(name="ban")
+async def ban(ctx, member: discord.Member, *, reason=None):
+    if ctx.author.guild_permissions.ban_members == True:
+        try:
+            embed = discord.Embed(title=f"{ctx.guild.name}에서 차단되셨습니다.")
+            
+            if reason == None:
+                reason = '없음'
+                embed.add_filed(name="사유", value=reason)
+                
+            await bot.get_user(member.id).send(embed=embed)
+                
+        except:
+            pass
+            
+        await member.ban()
+            
+    else: 
+        embed = discord.Embed(title="❌️ Error", description=f"해당 유저를 차단 시킬 권한이 없습니다!")
+        await ctx.reply(embed=embed)
+        return
+    
+@bot.command(name="kick")
+async def kick(ctx, member: discord.Member, *, reason=None):
+    if ctx.author.guild_permissions.kick_members == True:
+        try:
+            embed = discord.Embed(title=f"{ctx.guild.name}에서 추방되셨습니다.")         
+
+            if reason == None:
+                reason = '없음'
+                embed.add_filed(name="사유", value=reason)     
+
+            await bot.get_user(member.id).send(embed=embed)
+
+        except:
+            pass     
+
+        await member.kick()          
+
+    else: 
+        embed = discord.Embed(title="❌️ Error", description=f"해당 유저를 추방 시킬 권한이 없습니다!")
+        await ctx.reply(embed=embed)
+        return
       
 bot.run(config.token)
