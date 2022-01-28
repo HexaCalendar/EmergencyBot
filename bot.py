@@ -183,10 +183,17 @@ async def ban(ctx, member: disnake.Member, *, reason=None):
         except:
             pass
             
-        await member.ban()
+        try:
+            await member.ban()
+            embed = disnake.Embed(title="✅️ Success", description=f"{member}를 성공적으로 차단 했습니다.")
+            await ctx.reply(embed=embed)
+        except:
+            embed = disnake.Embed(title="❌️ Error", description=f"봇이 해당 유저를 차단 시킬 권한이 없습니다!")
+            await ctx.reply(embed=embed)
+            return
             
     else: 
-        embed = disnake.Embed(title="❌️ Error", description=f"해당 유저를 차단 시킬 권한이 없습니다!")
+        embed = disnake.Embed(title="❌️ Error", description=f"당신은 해당 유저를 차단 시킬 권한이 없습니다!")
         await ctx.reply(embed=embed)
         return
     
@@ -205,10 +212,17 @@ async def kick(ctx, member: disnake.Member, *, reason=None):
         except:
             pass     
 
-        await member.kick()          
+        try:
+            await member.kick()
+            embed = disnake.Embed(title="✅️ Success", description=f"{member}를 성공적으로 추방 했습니다.")
+            await ctx.reply(embed=embed)                         
+        except:
+            embed = disnake.Embed(title="❌️ Error", description=f"봇이 해당 유저를 추방 시킬 권한이 없습니다!")
+            await ctx.reply(embed=embed)
+            return          
 
     else: 
-        embed = disnake.Embed(title="❌️ Error", description=f"해당 유저를 추방 시킬 권한이 없습니다!")
+        embed = disnake.Embed(title="❌️ Error", description=f"당신은 해당 유저를 추방 시킬 권한이 없습니다!")
         await ctx.reply(embed=embed)
         return
       
