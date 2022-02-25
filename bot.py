@@ -241,5 +241,22 @@ async def verify(ctx):
     await ctx.message.delete()
     await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544031924294))
     await ctx.send(f"<@{ctx.author.id}> 인증 완료")
+    
+@bot.command(name="admin_verify")
+async def verify(ctx, type: str):
+    if ctx.author.id in bot.get_guild(861249106341396520).members:
+        await ctx.message.delete()
+        
+        if type == "MANAGER":
+            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716538730319893))
+        if type == "DEVELOPER":
+            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716537920831548))
+        if type == "TEAM":
+            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716536301842512))
+        if type == "ADMIN":
+            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716534364045362))
+            
+        await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544912732160))
+        await ctx.send(f"<@{ctx.author.id}> {type} 역할 인증 완료")
       
 bot.run(config.token)
