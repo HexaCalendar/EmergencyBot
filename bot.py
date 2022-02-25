@@ -226,6 +226,16 @@ async def kick(ctx, member: disnake.Member, *, reason=None):
         await ctx.reply(embed=embed)
         return
     
+@bot.command(name="human_verify")
+async def human_verify(ctx, *, member=disnake.Member):
+    if ctx.author.id == 902700864748273704 || ctx.author.id == 671231351013376015:
+        await ctx.message.delete()
+        await member.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544031924294))
+        await ctx.send(f"<@{member.id}> 인증 완료")
+    else:
+        await ctx.message.delete()
+        await ctx.send(f"<@{ctx.author.id}> 권한이 없습니다.")
+    
 @bot.command(name="verify")
 async def verify(ctx):
     await ctx.message.delete()
