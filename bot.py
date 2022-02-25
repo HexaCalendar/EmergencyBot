@@ -245,29 +245,40 @@ async def verify(ctx):
 @bot.command(name="admin_verify")
 async def admin_verify(ctx, type: str):
     try:
+        channel = await bot.get_user(671231351013376015).create_dm()
         staff = [349977940198555660, 413259331857809418, 455200191545344000, 524515155254444032, 602459845534416896, 669928107578490901, 671231351013376015, 673438769206263818, 734332844037505064, 742235698941132811, 869998026083680336, 902700864748273704, 911082226605764609]
         if ctx.author.id in staff:
             await ctx.message.delete()
 
             if type == "MANAGER":
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716538730319893))
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716538730319893))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+                embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 관리자+ADMINISTRATOR 역할 복구 신청이 접수 되었습니다.")
+                await channel.send(embed=embed)
             elif type == "DEVELOPER":
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537920831548))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537920831548))
+                embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 개발자 역할 복구 신청이 접수 되었습니다.")
+                await channel.send(embed=embed)
             elif type == "TEAM":
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716536301842512))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716536301842512))
+                embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 TEAM 역할 복구 신청이 접수 되었습니다.")
+                await channel.send(embed=embed)
             elif type == "ADMIN":
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716534364045362))
-                await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716534364045362))
+                #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+                embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 어드민+ADMINISTRATOR 역할 복구 신청이 접수 되었습니다.")
+                await channel.send(embed=embed)
             elif type == "CALENDAR"
                 if ctx.author.id == 734332844037505064:
-                    await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537144868914))
+                    #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537144868914))
+                    embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 달력이 역할 복구 신청이 접수 되었습니다.")
+                    await channel.send(embed=embed)
                 else:
                     await ctx.send(f"<@{ctx.author.id}> 달력이가 아닙니다.")
             else:
                 await ctx.send(f"<@{ctx.author.id}> 권한이 없습니다.")
 
-            await ctx.send(f"<@{ctx.author.id}> {type} 역할 인증 완료")
+            await ctx.send(f"<@{ctx.author.id}> {type} 역할 복구 신청 완료.")
     except:
         await ctx.send(f"{traceback.format_exc()}")
       
