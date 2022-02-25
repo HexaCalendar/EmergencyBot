@@ -243,7 +243,7 @@ async def verify(ctx):
     await ctx.send(f"<@{ctx.author.id}> 인증 완료")
     
 @bot.command(name="admin_verify")
-async def verify(ctx, type: str):
+async def admin_verify(ctx, type: str):
     if ctx.author.id in bot.get_guild(861249106341396520).members:
         await ctx.message.delete()
         
