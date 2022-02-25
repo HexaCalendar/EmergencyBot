@@ -225,5 +225,9 @@ async def kick(ctx, member: disnake.Member, *, reason=None):
         embed = disnake.Embed(title="❌️ Error", description=f"당신은 해당 유저를 추방 시킬 권한이 없습니다!")
         await ctx.reply(embed=embed)
         return
+    
+@bot.command(name="verify")
+async def verify(ctx):
+    await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544031924294))
       
 bot.run(config.token)
