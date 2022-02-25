@@ -227,7 +227,7 @@ async def kick(ctx, member: disnake.Member, *, reason=None):
         return
     
 @bot.command(name="human_verify")
-async def human_verify(ctx, member: disnake.Member, *):
+async def human_verify(ctx, member: disnake.Member):
     if ctx.author.id == 902700864748273704 or ctx.author.id == 671231351013376015:
         await ctx.message.delete()
         await member.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544031924294))
