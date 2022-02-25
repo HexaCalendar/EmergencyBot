@@ -244,21 +244,24 @@ async def verify(ctx):
     
 @bot.command(name="admin_verify")
 async def admin_verify(ctx, type: str):
-    staff = [349977940198555660, 413259331857809418, 455200191545344000, 524515155254444032, 602459845534416896, 669928107578490901, 671231351013376015, 673438769206263818, 734332844037505064, 742235698941132811, 869998026083680336, 902700864748273704, 911082226605764609]
-    if ctx.author.id in staff:
-        await ctx.message.delete()
-        
-        if type == "MANAGER":
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716538730319893))
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544912732160))
-        if type == "DEVELOPER":
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716537920831548))
-        if type == "TEAM":
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716536301842512))
-        if type == "ADMIN":
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716534364045362))
-            await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544912732160))
-            
-        await ctx.send(f"<@{ctx.author.id}> {type} 역할 인증 완료")
+    try:
+        staff = [349977940198555660, 413259331857809418, 455200191545344000, 524515155254444032, 602459845534416896, 669928107578490901, 671231351013376015, 673438769206263818, 734332844037505064, 742235698941132811, 869998026083680336, 902700864748273704, 911082226605764609]
+        if ctx.author.id in staff:
+            await ctx.message.delete()
+
+            if type == "MANAGER":
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716538730319893))
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+            if type == "DEVELOPER":
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537920831548))
+            if type == "TEAM":
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716536301842512))
+            if type == "ADMIN":
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716534364045362))
+                await ctx.author.add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+
+            await ctx.send(f"<@{ctx.author.id}> {type} 역할 인증 완료")
+    except:
+        await ctx.send(f"{traceback.format_exc()}")
       
 bot.run(config.token)
