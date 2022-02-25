@@ -252,13 +252,20 @@ async def admin_verify(ctx, type: str):
             if type == "MANAGER":
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716538730319893))
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
-            if type == "DEVELOPER":
+            elif type == "DEVELOPER":
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537920831548))
-            if type == "TEAM":
+            elif type == "TEAM":
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716536301842512))
-            if type == "ADMIN":
+            elif type == "ADMIN":
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716534364045362))
                 await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
+            elif type == "CALENDAR"
+                if ctx.author.id == 734332844037505064:
+                    await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537144868914))
+                else:
+                    await ctx.send(f"<@{ctx.author.id}> 달력이가 아닙니다.")
+            else:
+                await ctx.send(f"<@{ctx.author.id}> 권한이 없습니다.")
 
             await ctx.send(f"<@{ctx.author.id}> {type} 역할 인증 완료")
     except:
