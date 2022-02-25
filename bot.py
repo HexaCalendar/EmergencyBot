@@ -228,6 +228,8 @@ async def kick(ctx, member: disnake.Member, *, reason=None):
     
 @bot.command(name="verify")
 async def verify(ctx):
+    await ctx.message.delete()
     await ctx.author.add_roles(disnake.utils.get(ctx.guild.roles, id=946716544031924294))
+    await ctx.send(f"<@{ctx.author.id}> 인증 완료")
       
 bot.run(config.token)
