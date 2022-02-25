@@ -2,6 +2,7 @@ import disnake
 import os
 import config
 import traceback
+from disnake import Embed
 from disnake.ext import commands
 from datetime import datetime, timedelta
 from random import random
