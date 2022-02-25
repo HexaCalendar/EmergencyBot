@@ -268,7 +268,7 @@ async def admin_verify(ctx, type: str):
                 #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716544912732160))
                 embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 어드민+ADMINISTRATOR 역할 복구 신청이 접수 되었습니다.")
                 await channel.send(embed=embed)
-            elif type == "CALENDAR"
+            elif type == "CALENDAR":
                 if ctx.author.id == 734332844037505064:
                     #await bot.get_guild(794870273424752641).get_member(ctx.author.id).add_roles(disnake.utils.get(bot.get_guild(794870273424752641).roles, id=946716537144868914))
                     embed = Embed(title=f"🎁 역할 복구 신청", description=f"<@{ctx.author.id}>({ctx.author})의 달력이 역할 복구 신청이 접수 되었습니다.")
